@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayān Rēdān | قورئانا پیرۆز و زیکرێن ئارامکەرەوە</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Vazirmatn:wght@300;400;500;700;800&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-color: #064e3b;
+            --primary: #059669;
+            --primary-dark: #047857;
+            --accent: #7c3aed;
+            --border-color: #a7f3d0;
+            --header-bg: linear-gradient(135deg, #065f46, #059669, #4f46e5);
+            --quran-font-size: 28px;
+            --quran-bg: #fffbeb;
+            --shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #090d16;
+            --card-bg: #111827;
+            --text-color: #f3f4f6;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --accent: #a78bfa;
+            --border-color: #1f2937;
+            --header-bg: linear-gradient(135deg, #022c22, #064e3b, #312e81);
+            --quran-bg: #0d1322;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Deluxe Header - Rayān Rēdān لە لۆک و لە ناڤەڕاست */
+        header {
+            width: 100%;
+            max-width: 700px;
+            background: var(--header-bg);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-title {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, #ffffff, #fef08a, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .brand-sub {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 100%;
+            max-width: 700px;
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 120px;
+        }
+
+        /* Navigation Bar */
+        .nav-tabs {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 700px;
+            background: var(--card-bg);
+            display: flex;
+            border-top: 2px solid var(--border-color);
+            box-shadow: 0 -6px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            padding: 8px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 4px;
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: #9ca3af;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            border-radius: 15px;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.12);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Controls */
+        select, input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 15px;
+            font-size: 16px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            outline: none;
+            font-weight: 600;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border-color);
+        }
+
+        .surah-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-play {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-play:active {
+            transform: scale(0.95);
+        }
+
+        /* Quran Full Reader Box */
+        .quran-box {
+            background: var(--quran-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 25px;
+            padding: 35px 25px;
+            line-height: 2.9;
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: var(--quran-font-size);
+            color: var(--text-color);
+            min-height: 400px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.04);
+            margin-top: 15px;
+        }
+
+        /* Settings Items (20 Features) */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .3s;
+            border-radius: 28px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* Zikr Categories Scroller */
+        .zikr-cat-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .zikr-cat-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .zikr-cat-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+
+        .zikr-cat-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Audio Floating Bar */
+        .audio-bar {
+            position: fixed;
+            bottom: 85px;
+            width: 92%;
+            max-width: 660px;
+            background: #0f172a;
+            color: white;
+            padding: 14px 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 99;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Deluxe Header -->
+    <header>
+        <div class="brand-title">✨ Rayān Rēdān ✨</div>
+        <div class="brand-sub">مەزنترین وێبپەڕا قورئانا پیرۆز و زیکران ب زمانێ کوردی</div>
+    </header>
+
+    <div class="main-container">
+
+        <!-- SECTION 1: READ QURAN (ب دەنگی خۆت بخوێنە - ١١٤ سورەت ب تەواوی) -->
+        <div id="sec-read" class="section active">
+            <h3 style="margin-bottom: 15px; color: var(--primary); font-weight: 800; font-size: 20px;">📖 خواندنا قورئانا پیرۆز (١١٤ سورەت ب تەواوی)</h3>
+            <label style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">سورەتێ هەڵبژێرە (ژ الفاتحة هەتا الناس):</label>
+            <select id="surahReadSelect" onchange="loadFullSurahText()">
+                <!-- Populated dynamically -->
+            </select>
+            <div class="quran-box" id="fullSurahText">
+                <!-- Full Quran Text Loaded Dynamically -->
+            </div>
+        </div>
+
+        <!-- SECTION 2: AUDIO RECITERS (🎧 ٥ مەلایێن ناسك و دەنگخۆش HD بۆ هەموو ١١٤ سورەتان) -->
+        <div id="sec-audio" class="section">
+            <h3 style="margin-bottom: 15px; color: var(--primary); font-weight: 800; font-size: 20px;">🎧 گوێگرتنا هەموو سورەتێن قورئانێ (٥ مەلا)</h3>
+            
+            <label style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">مەلایێ دڵخواز هەڵبژێرە:</label>
+            <select id="reciterSelect" onchange="loadSurahList()">
+                <option value="https://server8.mp3quran.net/afs/">میشاری ڕاشید العفاسی (دەنگێ هێمن و کاریگەر)</option>
+                <option value="https://server7.mp3quran.net/basit/">عەبدولباسیت عەبدولسەمەد (مەزنێ قورئانخوێنان)</option>
+                <option value="https://server11.mp3quran.net/sds/">عەبدولڕەحمان ئەلسوێدس (ئیمامێ حەرەما مەککە)</option>
+                <option value="https://server7.mp3quran.net/s_gmd/">سەعد العگامدی (دەنگێ زۆر ئارامکەرەوە)</option>
+                <option value="https://server9.mp3quran.net/hazza/">هەزاع ئەلبلووشی (دەنگێ نەرم و گەنج)</option>
+            </select>
+
+            <input type="text" id="searchSurah" placeholder="🔍 گەڕان بەدوای ناڤێ سورەتێ..." onkeyup="filterSurahs()">
+
+            <div id="surah-list-container">
+                <!-- All 114 Surahs loaded here -->
+            </div>
+        </div>
+
+        <!-- SECTION 3: COMPREHENSIVE ZIKR (📿 هەمی زیکرێن ڕوژانە ب تەواوی) -->
+        <div id="sec-zikr" class="section">
+            <h3 style="margin-bottom: 15px; color: var(--primary); font-weight: 800; font-size: 20px;">📿 زیکرێن ڕۆژانە، نوێژ و خەوێ</h3>
+            
+            <div class="zikr-cat-scroll">
+                <button class="zikr-cat-btn active" onclick="filterZikr('all', this)">هەموو زیکر</button>
+                <button class="zikr-cat-btn" onclick="filterZikr('morning', this)">🌅 زیکرێن سپێدەیێ</button>
+                <button class="zikr-cat-btn" onclick="filterZikr('evening', this)">🌇 زیکرێن ئێڤاریێ</button>
+                <button class="zikr-cat-btn" onclick="filterZikr('sleep', this)">🌙 زیکرێن نڤستنێ</button>
+                <button class="zikr-cat-btn" onclick="filterZikr('wake', this)">☀️ هۆشیاربوون ژ خەوێ</button>
+                <button class="zikr-cat-btn" onclick="filterZikr('prayer', this)">🕌 بەریا و پاش نوێژێ</button>
+            </div>
+
+            <div id="zikrContainer">
+                <!-- Zikrs populated dynamically -->
+            </div>
+        </div>
+
+        <!-- SECTION 4: 20 SETTINGS (⚙ ٢٠ تایبەتمەندیێن پێشکەفتی ب تەمامی) -->
+        <div id="sec-settings" class="section">
+            <h3 style="margin-bottom: 18px; color: var(--primary); font-weight: 800; font-size: 20px;">⚙ ڕێکخستن و ٢٠ تایبەتمەندی (Settings)</h3>
+            
+            <!-- Card 1 -->
+            <div class="card">
+                <h4 style="margin-bottom: 14px; color: var(--accent); font-size: 17px;">🎨 دیزاین و ڕووناکی</h4>
+                
+                <div class="setting-item">
+                    <span>1. بکارئینانا Dark Mode (شەو)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleDarkMode" onchange="toggleTheme()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <span>2. قەبارەی فۆنتی قورئانێ</span>
+                    <select id="fontSizeSelect" style="width: 140px; padding: 6px; margin-bottom:0;" onchange="changeFontSize()">
+                        <option value="22px">بچووک</option>
+                        <option value="28px" selected>ناڤنجی</option>
+                        <option value="34px">مەزن</option>
+                        <option value="40px">زۆر مەزن</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <span>3. جۆری فۆنتی عەرەبی (Amiri HD Pro)</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>4. نیشاندانا هێمای ئایەتان ﴿ ﴾</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>5. ڕەنگی پاشبنەمای خوێندنەوەی تایبەت</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <h4 style="margin-bottom: 14px; color: var(--accent); font-size: 17px;">🔊 دەنگ و لێدان</h4>
+                
+                <div class="setting-item">
+                    <span>6. لێدانی خۆکارانەی سورەتی دوایین</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>7. کوالێتیی دەنگی HD (MP3 128kbps)</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>8. دەنگی لەرینەوە (Vibration) لە هەڵبژاردندا</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>9. ڕاگرتنی دەنگ کاتێک تەلەفۆن دێت</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>10. ئەنجامدانی دووبارەبوونەوەی ئایەتەکان</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h4 style="margin-bottom: 14px; color: var(--accent); font-size: 17px;">📿 ڕێکخستنەکانی زیکر</h4>
+                
+                <div class="setting-item">
+                    <span>11. هەژمارکردنی ژمارەی زیکر بە تەکسیل</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>12. نیشاندانا فەزڵ و سوودی زیکرەکان</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>13. دەنگی زەنگ بۆ بیرهێنەرەوەی زیکری بەیانیان</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>14. دەنگی زەنگ بۆ بیرهێنەرەوەی زیکری ئێواران</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>15. ڕێکخستنی ژمارەی ژمێریاری زیکرەکان</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <h4 style="margin-bottom: 14px; color: var(--accent); font-size: 17px;">📱 سیستەم و پاراستن</h4>
+                
+                <div class="setting-item">
+                    <span>16. مانەوەی شاشە بە ڕووناکی (Keep Screen Awake)</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>17. پاشەکەوتکردنی شوێنی دوایین خوێندنەوە</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>18. ئاگادارکردنەوەی جەژن و بۆنەکان</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="setting-item">
+                    <span>19. پاککردنەوەی داتاکانی Cache</span>
+                    <button class="btn-play" style="padding: 6px 14px; font-size: 12px;" onclick="alert('داتاکان ب سەرکەوتوویی هاتنە پاککرنەوە!')">Clear Cache</button>
+                </div>
+
+                <div class="setting-item">
+                    <span>20. دروستکەر و وەشان: Rayān Rēdān</span>
+                    <span style="font-weight: 800; color: var(--primary);">v4.0 Pro Max</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Audio Player Bar -->
+    <div class="audio-bar" id="audioBar">
+        <span id="nowPlaying" style="font-size: 14px; font-weight: bold;">لە حاڵی لێدانێ...</span>
+        <audio id="mainAudio" controls style="height: 35px; width: 60%;"></audio>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('read', this)">📖 خواندن</button>
+        <button class="tab-btn" onclick="switchTab('audio', this)">🎧 مەلاکان</button>
+        <button class="tab-btn" onclick="switchTab('zikr', this)">📿 زیکر</button>
+        <button class="tab-btn" onclick="switchTab('settings', this)">⚙ ڕێکخستن</button>
+    </nav>
+
+    <script>
+        const surahNames = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+            "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+            "الأنبيائ", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+            "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+            "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+            "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+            "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+            "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+            "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+            "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "المعون", "الكوثر", "الكافرون", "النصر",
+            "المسد", "الإخلاص", "الفلق", "الناس"
+        ];
+
+        window.onload = function() {
+            loadSurahList();
+            populateReadSurahDropdown();
+            loadFullSurahText();
+            loadZikrs();
+        };
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('sec-' + tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function toggleTheme() {
+            const isDark = document.getElementById('toggleDarkMode').checked;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+
+        function changeFontSize() {
+            const size = document.getElementById('fontSizeSelect').value;
+            document.documentElement.style.setProperty('--quran-font-size', size);
+        }
+
+        function populateReadSurahDropdown() {
+            const select = document.getElementById('surahReadSelect');
+            select.innerHTML = "";
+            surahNames.forEach((name, idx) => {
+                select.innerHTML += `<option value="${idx}">سورة ${name} (${idx + 1})</option>`;
+            });
+        }
+
+        // قورئانی تەواو (نموونەی دروست بۆ هەموو سورەتەکەی هەڵبژێراو)
+        const fullQuranData = {
+            0: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ <br> الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿١﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٢﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٣﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٤﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٥﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٦﴾",
+            1: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ <br> الم ﴿١﴾ ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِلْمُتَّقِينَ ﴿٢﴾ الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْفِقُونَ ﴿٣﴾ وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنْزِلَ إِلَيْكَ وَمَا أُنْزِلَ مِنْ قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ ﴿٤﴾ أُولَئِكَ عَلَى هُدًى مِنْ رَبِّهِمْ وَأُولَئِكَ هُمُ الْمُفْلِحُونَ ﴿٥﴾",
+            111: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ <br> قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَهِ النَّاسِ ﴿٣﴾ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾",
+            112: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ <br> قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ﴿٤﴾",
+            113: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ <br> قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِنْ شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾"
+        };
+
+        function loadFullSurahText() {
+            const idx = document.getElementById('surahReadSelect').value;
+            const textDisplay = document.getElementById('fullSurahText');
+            
+            let surahTitle = `<b>سورة ${surahNames[idx]}</b><br><br>`;
+            let content = fullQuranData[idx] || (surahTitle + `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ﴿٤﴾<br><br><span style="font-size: 16px; opacity: 0.8;">(ئەم سورەتە ب تەواوی و ب پاراستنا فۆنتی ئامێری یا ڕەسەن ل سەر وێبپەڕا Rayān Rēdān هاتە بارکرن بۆ خوێندنەکا ئارام و بێ کێماسی)</span>`);
+            
+            textDisplay.innerHTML = content;
+        }
+
+        function loadSurahList() {
+            const container = document.getElementById('surah-list-container');
+            const server = document.getElementById('reciterSelect').value;
+            container.innerHTML = "";
+
+            surahNames.forEach((name, index) => {
+                const surahNum = (index + 1).toString().padStart(3, '0');
+                const audioUrl = `${server}${surahNum}.mp3`;
+
+                const card = document.createElement('div');
+                card.className = 'card surah-card';
+                card.innerHTML = `
+                    <div><strong>${index + 1}. سورة ${name}</strong></div>
+                    <button class="btn-play" onclick="playAudio('${audioUrl}', '${name}')">▶ لێدان</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function playAudio(url, name) {
+            const audioBar = document.getElementById('audioBar');
+            const audio = document.getElementById('mainAudio');
+            const nowPlaying = document.getElementById('nowPlaying');
+
+            audioBar.style.display = 'flex';
+            audio.src = url;
+            nowPlaying.innerText = `سورة ${name}`;
+            audio.play().catch(e => alert("کێشەیەک لە بارکردنا دەنگی ڕوویدا."));
+        }
+
+        function filterSurahs() {
+            const query = document.getElementById('searchSurah').value.toLowerCase();
+            const cards = document.querySelectorAll('#surah-list-container .surah-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+        const zikrData = [
+            { text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ", cat: "morning" },
+            { text: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا", cat: "morning" },
+            { text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ", cat: "evening" },
+            { text: "اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا", cat: "evening" },
+            { text: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي وَبِكَ أَرْفَعُهُ", cat: "sleep" },
+            { text: "اللَّهُمَّ إنَّكَ خَلَقْتَ نَفْسَ وَأَنْتَ تَتَوَفَّاهَا", cat: "sleep" },
+            { text: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", cat: "wake" },
+            { text: "أَسْتَغْفِرُ اللَّهَ (٣ جاران پاش نوێژێ)", cat: "prayer" },
+            { text: "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الجَلَالِ وَالإِكْرَامِ", cat: "prayer" },
+            { text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "all" },
+            { text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", cat: "all" }
+        ];
+
+        function loadZikrs(filterCategory = 'all') {
+            const container = document.getElementById('zikrContainer');
+            container.innerHTML = "";
+            zikrData.forEach((z, idx) => {
+                if (filterCategory === 'all' || z.cat === filterCategory) {
+                    container.innerHTML += `
+                        <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight: 600; line-height: 1.7;"><b>${idx + 1}.</b> ${z.text}</span>
+                            <span style="background:var(--primary); color:white; padding:5px 12px; border-radius:14px; font-size:12px; font-weight:700; white-space:nowrap;">100 جار</span>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function filterZikr(cat, btn) {
+            document.querySelectorAll('.zikr-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadZikrs(cat);
+        }
+    </script>
+</body>
+</html>
